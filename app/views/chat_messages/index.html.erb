@@ -1,0 +1,23 @@
+<h1>CHAT INDEX</h1>
+
+<%= link_to 'Logout', destroy_session_chat_messages_path %>
+<br>
+<br>
+
+<% @chat_messages.each do |chat_message| %>
+  <hr>
+  <strong><%= chat_message.user_name %>:</strong> <%= chat_message.content %>
+  <br>
+  <em>Sent at <%= l(chat_message.created_at, format: :short) %></em>
+<% end %>
+<hr>
+<br>
+<br>
+<br>
+
+<%= form_for @chat_message do |f| %>
+  <%= f.hidden_field :user_name, value: session[:user_name] %>
+  <%= f.label :content, 'Message:' %>
+  <%= f.text_field :content, style: 'width: 70%; height: 1.4em;' %>
+  <%= f.submit 'Send' %> <em><span id='total_chars'>0</span> chars</em>
+<% end %>
