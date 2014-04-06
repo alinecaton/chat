@@ -6,6 +6,7 @@ Chat::Application.routes.draw do
       get  :new_session
       post :create_session
       get  :destroy_session
+      get  :history
     end
   end
 end

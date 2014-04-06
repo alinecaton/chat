@@ -1,0 +1,6 @@
+$('#chat_message_content').val('');
+$('#total_chars').html('0');
+
+<% if !@chat_message.persisted? %>
+  $('#alert').html('<%= @chat_message.errors.full_messages.to_sentence %>');
+<% end %>

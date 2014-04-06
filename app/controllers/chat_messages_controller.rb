@@ -1,5 +1,5 @@
 class ChatMessagesController < ApplicationController
-  before_action :set_chat_messages, only: :index
+  before_action :set_chat_messages, only: :history
 
   def index
     redirect_to new_session_chat_messages_path if session[:user_name].nil?
@@ -7,16 +7,12 @@ class ChatMessagesController < ApplicationController
     @chat_message  = ChatMessage.new
   end
 
-  def create
-    @chat_message = ChatMessage.new(permited_params)
+  def history
+    render layout: false
+  end
 
-    if @chat_message.save
-      redirect_to root_path
-    else
-      set_chat_messages
-      flash.now[:alert] = @chat_message.errors.full_messages.to_sentence
-      render :index
-    end
+  def create
+    @chat_message = ChatMessage.create(permited_params)
   end
 
   def new_session
